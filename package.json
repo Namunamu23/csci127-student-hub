@@ -1,0 +1,10 @@
+{
+  "name": "csci-127-student-hub",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "build": "node build.mjs",
+    "check": "node check.mjs"
+  }
+}
