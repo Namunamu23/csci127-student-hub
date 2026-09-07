@@ -1,17 +1,17 @@
 {
-  "updatedAt": "2026-09-07T04:42:50.877Z",
+  "updatedAt": "2026-09-07T04:45:42.314Z",
   "note": "Short summaries only. The full text of each announcement is on Brightspace (login); this site does not read Brightspace itself.",
   "items": [
     {
       "id": 1,
       "title": "Week 2 Announcements",
       "date": "2026-09-04",
-      "text": "Today, Friday, September 4: The dedicated CSCI 127 lab is open 11:30-4pm (shorter hours on Fridays). Need some help getting started? The lab is staffed with amazing peer instructors who will guide you through the first lab and homework. …",
-      "link": "",
+      "text": "Lab open Friday 11:30–4 with peer instructors, and 5% extra credit for finishing Quiz 1 and Code Review 1 early. Monday Sep 7 the college is closed (Labor Day). Tuesday Sep 8: optional quiz review 9:30–10 am in 118 HN, and Homework 1 is due 5 pm on Gradescope.",
+      "link": "https://brightspace.cuny.edu/d2l/le/news/1315489/6464172/view",
       "url": "https://github.com/Namunamu23/csci127-student-hub/issues/1",
       "auto": true,
       "addedAt": "2026-09-07T04:03:56Z",
-      "updatedAt": "2026-09-07T04:03:56Z",
+      "updatedAt": "2026-09-07T04:45:28Z",
       "source": "issue"
     },
     {
