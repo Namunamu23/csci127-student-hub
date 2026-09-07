@@ -1,0 +1,31 @@
+name: Add a Brightspace announcement
+description: Paste a course announcement so it shows on the hub (the site cannot read Brightspace itself).
+title: "[Announcement] "
+labels: ["announcement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Keep it to what the course said. No grades, names of other students, or personal details.
+        The hub shows the title, date and text below within a few hours. Closing this issue removes it from the hub.
+  - type: input
+    id: date
+    attributes:
+      label: Date
+      description: When the course posted it (YYYY-MM-DD).
+      placeholder: "2026-09-04"
+    validations:
+      required: true
+  - type: textarea
+    id: text
+    attributes:
+      label: What it says
+      description: A short, faithful summary or the exact wording.
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      description: Optional link to the announcement on Brightspace (login required).
+      placeholder: "https://brightspace.cuny.edu/d2l/le/news/1315489/..../view"

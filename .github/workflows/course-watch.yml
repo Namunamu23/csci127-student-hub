@@ -1,0 +1,86 @@
+# Course Watch — re-reads the official CSCI 127 pages, records changes,
+# rebuilds the hub and publishes it to GitHub Pages.
+#
+# Runs: four times a day, on every push to main, whenever an issue labelled
+# "announcement" changes, and on demand (Actions → Course Watch → Run workflow).
+# Requires: Settings → Pages → Source = "GitHub Actions".
+name: Course Watch
+
+on:
+  schedule:
+    - cron: "17 3,9,15,21 * * *"   # 03:17, 09:17, 15:17, 21:17 UTC
+  push:
+    branches: [main]
+  issues:
+    types: [opened, edited, closed, reopened, labeled, unlabeled, deleted]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+  issues: write
+
+concurrency:
+  group: course-watch
+  cancel-in-progress: false
+
+jobs:
+  watch-build-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Make sure the labels the hub uses exist
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create announcement --color 1f4ed8 --description "A Brightspace announcement to show on the hub" --force
+          gh label create course-watch --color e94f37 --description "Opened automatically when the course pages could not be read" --force
+
+      - name: Re-read the official course pages
+        id: watch
+        continue-on-error: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/fetch-course.mjs
+
+      - name: Commit updated course data
+        if: steps.watch.outputs.changed == 'true' && steps.watch.outputs.valid == 'true'
+        run: |
+          git config user.name "course-watch[bot]"
+          git config user.email "course-watch@users.noreply.github.com"
+          git add src/course.json src/changes.json src/status.json src/announcements.json
+          git commit -m "Course data update ($(date -u +'%Y-%m-%d %H:%M UTC'))" || echo "nothing to commit"
+          git push
+
+      - name: Open an issue if the check failed
+        if: steps.watch.outputs.valid == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY="The Course Watch run on $(date -u +'%Y-%m-%d %H:%M UTC') could not validate the course pages, so the previously published data is still live. Details are in src/status.json and the workflow log: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          EXISTING=$(gh issue list --label "course-watch" --state open --json number --jq '.[0].number')
+          if [ -n "$EXISTING" ]; then gh issue comment "$EXISTING" --body "$BODY"; else gh issue create --title "Course Watch needs attention" --label "course-watch" --body "$BODY"; fi
+
+      - name: Validate and build
+        run: |
+          npm run check
+          npm run build
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deploy
+        uses: actions/deploy-pages@v4

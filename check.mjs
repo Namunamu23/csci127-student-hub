@@ -1,34 +1,28 @@
-// Validates src/data.js and src/index.html without any dependencies.
+// Validates the editorial layer (src/data.js), the generated course data
+// (src/course.json) and src/index.html without any dependencies.
 // Run with: npm run check
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 
 const problems = [];
 const note = (message) => problems.push(message);
+const read = (p) => readFile(new URL(p, import.meta.url), "utf8");
 
-const source = await readFile(new URL("./src/data.js", import.meta.url), "utf8");
+/* ---------- editorial layer ---------- */
 const sandbox = { window: {} };
-vm.runInNewContext(source, sandbox);
+vm.runInNewContext(await read("./src/data.js"), sandbox);
 const data = sandbox.window.CSCI127_DATA;
 if (!data) { console.error("data.js did not define window.CSCI127_DATA"); process.exit(1); }
-
-const { LINKS, PLACES, CATEGORIES, TASKS, MONDAY, TUESDAY, TOOLBOX, SOFTWARE, POSSIBLY_MISSED, SOURCES, GRADING, LAB, AI_POLICY, QUESTIONS } = data;
+const { LINKS, PLACES, CATEGORIES, RULES, TEMPLATES, STANDING, TOOLBOX, SOFTWARE, MISSED_CHECKS, SOURCES, GRADING_EXTRA, AI_POLICY, LAB, QUESTIONS, CAMPUS_DAY } = data;
 
 function checkUrl(href, where) {
   try {
     const url = new URL(href);
     if (!["https:", "http:", "mailto:"].includes(url.protocol)) note(`${where}: unexpected protocol in ${href}`);
     if (url.protocol === "http:") console.warn(`warning: ${where} uses plain http (${href})`);
-  } catch {
-    note(`${where}: invalid URL ${href}`);
-  }
+  } catch { note(`${where}: invalid URL ${href}`); }
 }
-
-for (const [key, link] of Object.entries(LINKS)) {
-  if (!link.label) note(`LINKS.${key} has no label`);
-  checkUrl(link.href, `LINKS.${key}`);
-}
-
+for (const [key, link] of Object.entries(LINKS)) { if (!link.label) note(`LINKS.${key} has no label`); checkUrl(link.href, `LINKS.${key}`); }
 function checkLinks(specs, where) {
   (specs || []).forEach((spec, i) => {
     if (spec.key && !LINKS[spec.key]) note(`${where}: links[${i}] refers to unknown LINKS key "${spec.key}"`);
@@ -36,67 +30,60 @@ function checkLinks(specs, where) {
     if (spec.href) checkUrl(spec.href, `${where} links[${i}]`);
   });
 }
+const checkCategory = (c, where) => { if (!CATEGORIES[c]) note(`${where}: unknown category "${c}"`); };
 
-function checkCategory(category, where) {
-  if (!CATEGORIES[category]) note(`${where}: unknown category "${category}"`);
-}
-
-function checkDate(iso, where) {
-  if (!iso) return;
-  if (Number.isNaN(new Date(iso).getTime())) note(`${where}: unparseable date ${iso}`);
-  if (!/[+-]\d{2}:\d{2}$/.test(iso)) note(`${where}: date ${iso} has no UTC offset (use -04:00 or -05:00 for New York)`);
-}
+if (!RULES || !RULES.lecture || typeof RULES.lecture.weekday !== "number") note("RULES.lecture.weekday missing");
+if (!/^\d{2}:\d{2}$/.test(RULES?.assessmentDeadline?.time || "")) note("RULES.assessmentDeadline.time must be HH:MM");
+["homework", "quiz", "codeReview", "lab", "lecture", "extra", "final"].forEach((k) => { if (typeof TEMPLATES?.[k] !== "function") note(`TEMPLATES.${k} missing`); });
+if (RULES?.preLecture?.source && !LINKS[RULES.preLecture.source]) note("RULES.preLecture.source is not a LINKS key");
+if (RULES?.labHours?.source && !LINKS[RULES.labHours.source]) note("RULES.labHours.source is not a LINKS key");
 
 const ids = new Set();
-TASKS.forEach((task) => {
-  const where = `TASKS.${task.id}`;
-  if (ids.has(task.id)) note(`${where}: duplicate id`);
-  ids.add(task.id);
-  if (!task.title) note(`${where}: missing title`);
-  checkCategory(task.category, where);
-  if (!PLACES[task.where]) note(`${where}: unknown place "${task.where}"`);
-  if (!["before", "tuesday", "later"].includes(task.day)) note(`${where}: day must be before | tuesday | later`);
-  if (task.urgent && task.day === "later") note(`${where}: urgent tasks need day "before" or "tuesday"`);
-  if (!task.due && !task.dueLabel) note(`${where}: needs a due date or a dueLabel`);
-  checkDate(task.due, where);
-  checkDate(task.start, where);
-  checkLinks(task.links, where);
+STANDING.forEach((s) => {
+  const where = `STANDING.${s.id}`;
+  if (ids.has(s.id)) note(`${where}: duplicate id`); ids.add(s.id);
+  if (/^(hw|quiz|cr|lab|ec|lecture)-/.test(s.id) || s.id === "final") note(`${where}: id collides with generated task ids`);
+  checkCategory(s.category, where);
+  if (!PLACES[s.where]) note(`${where}: unknown place "${s.where}"`);
+  if (!s.dueLabel) note(`${where}: needs a dueLabel`);
+  checkLinks(s.links, where);
 });
-
-MONDAY.plan.forEach((step, i) => {
-  if (step.taskId && !ids.has(step.taskId)) note(`MONDAY.plan[${i}]: unknown taskId "${step.taskId}"`);
-  if (!step.taskId && !step.id) note(`MONDAY.plan[${i}]: needs a taskId or its own id`);
-});
-checkLinks(MONDAY.links, "MONDAY");
-
-TUESDAY.timeline.forEach((entry, i) => {
-  const where = `TUESDAY.timeline[${i}]`;
-  checkCategory(entry.category, where);
-  if (entry.taskId && !ids.has(entry.taskId)) note(`${where}: unknown taskId "${entry.taskId}"`);
-  if (!PLACES[entry.where]) note(`${where}: unknown place "${entry.where}"`);
-  checkLinks(entry.links, where);
-});
-
-TOOLBOX.forEach((tool) => { checkCategory(tool.category, `TOOLBOX.${tool.key}`); checkLinks(tool.links, `TOOLBOX.${tool.key}`); });
+TOOLBOX.forEach((t) => { checkCategory(t.category, `TOOLBOX.${t.key}`); checkLinks(t.links, `TOOLBOX.${t.key}`); });
 SOFTWARE.forEach((phase) => phase.items.forEach((item) => { checkCategory(item.category, `SOFTWARE "${item.name}"`); checkLinks(item.links, `SOFTWARE "${item.name}"`); }));
-POSSIBLY_MISSED.forEach((m, i) => { checkCategory(m.category, `POSSIBLY_MISSED[${i}]`); checkLinks(m.links, `POSSIBLY_MISSED[${i}]`); });
+MISSED_CHECKS.forEach((m, i) => { checkCategory(m.category, `MISSED_CHECKS[${i}]`); checkLinks(m.links, `MISSED_CHECKS[${i}]`); });
 SOURCES.forEach((s, i) => { if (!LINKS[s.key]) note(`SOURCES[${i}]: unknown LINKS key "${s.key}"`); });
-checkLinks([GRADING.source, AI_POLICY.source], "GRADING/AI_POLICY source");
+checkLinks([GRADING_EXTRA.source, AI_POLICY.source], "GRADING_EXTRA/AI_POLICY source");
 checkLinks(LAB.links, "LAB");
+if (!CAMPUS_DAY || !CAMPUS_DAY.bring?.length) note("CAMPUS_DAY.bring is empty");
 
-const total = GRADING.weights.reduce((sum, w) => sum + w.percent, 0);
-if (total !== 100) note(`GRADING weights add up to ${total}%, not 100%`);
+/* ---------- generated course data ---------- */
+let course = null;
+try { course = JSON.parse(await read("./src/course.json")); } catch { note("src/course.json is missing — run `npm run watch`"); }
+if (course) {
+  const iso = (s) => typeof s === "string" && /^\d{4}-\d{2}-\d{2}/.test(s) && !Number.isNaN(Date.parse(s));
+  if (!(course.homework || []).length) note("course.json has no homework");
+  (course.homework || []).forEach((h) => { if (!iso(h.due)) note(`Homework ${h.n} has no due datetime`); if (!h.url) note(`Homework ${h.n} has no url`); });
+  (course.windows || []).forEach((w) => { if (!iso(w.end)) note(`Week ${w.week} window has no end date`); });
+  (course.labs || []).forEach((l) => { if (!iso(l.target)) note(`Lab ${l.n} has no target date`); });
+  (course.weeks || []).forEach((w) => { if (!iso(w.start) || !iso(w.end)) note(`Week ${w.n} has no date range`); });
+  if (!iso(course.final?.date)) note("course.json final.date missing");
+  const total = (course.grading?.weights || []).reduce((s, w) => s + w.percent, 0);
+  if (total !== 100) note(`course.json grading weights add up to ${total}`);
+  const stale = (Date.now() - Date.parse(course.generatedAt)) / 86400000;
+  if (stale > 14) console.warn(`warning: course.json is ${Math.round(stale)} days old`);
+}
+for (const name of ["changes.json", "status.json", "announcements.json"]) {
+  try { JSON.parse(await read("./src/" + name)); } catch { note(`src/${name} is missing or invalid JSON`); }
+}
 
-const html = await readFile(new URL("./src/index.html", import.meta.url), "utf8");
+/* ---------- html ---------- */
+const html = await read("./src/index.html");
 QUESTIONS.forEach((q) => { if (!html.includes(`id="${q.target}"`)) note(`QUESTIONS "${q.q}" points to missing section #${q.target}`); });
 for (const match of html.matchAll(/href="(https?:[^"]+)"/g)) checkUrl(match[1], "index.html");
 for (const match of html.matchAll(/href="#([^"]+)"/g)) { if (!html.includes(`id="${match[1]}"`)) note(`index.html: anchor #${match[1]} has no target`); }
-["data.js", "app.js", "styles.css"].forEach((file) => { if (!html.includes(file)) note(`index.html does not reference ${file}`); });
+["data.js", "course.js", "app.js", "styles.css"].forEach((file) => { if (!html.includes(file)) note(`index.html does not reference ${file}`); });
+["focus-before", "focus-tuesday", "day-cards", "campus-timeline", "week-body-content", "task-list", "announcement-list", "toolbox-grid", "grading-weights", "lab-where", "software-phases", "ai-allowed", "missed-list", "status-sources", "change-list", "source-list"].forEach((id) => { if (!html.includes(`id="${id}"`)) note(`index.html is missing #${id}, which app.js renders into`); });
 
-const verifyCount = JSON.stringify(data).match(/"verify":/g)?.length ?? 0;
-console.log(`Checked ${Object.keys(LINKS).length} links, ${TASKS.length} tasks, ${TOOLBOX.length} toolbox entries, ${verifyCount} items flagged "verify".`);
-if (problems.length) {
-  console.error("\nProblems:\n - " + problems.join("\n - "));
-  process.exit(1);
-}
+console.log(`Checked ${Object.keys(LINKS).length} links, ${STANDING.length} standing reminders, ${TOOLBOX.length} toolbox entries` + (course ? `, ${course.homework.length} homework items, ${course.windows.length} windows, ${course.weeks.length} weeks` : "") + ".");
+if (problems.length) { console.error("\nProblems:\n - " + problems.join("\n - ")); process.exit(1); }
 console.log("No problems found.");

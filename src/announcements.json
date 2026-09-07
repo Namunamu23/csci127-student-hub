@@ -1,0 +1,24 @@
+{
+  "updatedAt": "2026-09-07T00:00:00Z",
+  "note": "Added by hand from Brightspace. This site does not read Brightspace itself.",
+  "items": [
+    {
+      "id": "maint-2026-09-04",
+      "source": "maintainer",
+      "date": "2026-09-04",
+      "title": "Week 2: Tuesday review session and 5 pm deadlines",
+      "text": "Optional focused review Tuesday 9:30–10:00 am in 118 HN before lecture. Homework 1, Quiz 1 and Code Review 1 are due by 5:00 pm on Tuesday, September 8.",
+      "link": "https://brightspace.cuny.edu/d2l/le/news/1315489/6464172/view",
+      "checkedAt": "2026-09-06"
+    },
+    {
+      "id": "maint-2026-08-28",
+      "source": "maintainer",
+      "date": "2026-08-28",
+      "title": "Semester start: lab hours and lecture slides",
+      "text": "1001E HN lab hours: Monday–Thursday 11:30 am–5:15 pm, Friday 11:30 am–4:00 pm, when classes meet. Lecture slides are posted on Brightspace on Tuesdays at 9 am.",
+      "link": "https://brightspace.cuny.edu/d2l/le/news/1315489/6412497/view",
+      "checkedAt": "2026-09-06"
+    }
+  ]
+}

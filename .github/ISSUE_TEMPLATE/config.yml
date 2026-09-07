@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Something on the hub is wrong or out of date
+    url: https://github.com/Namunamu23/csci127-student-hub/issues/new
+    about: Open a blank issue and say which section and what the official page shows.

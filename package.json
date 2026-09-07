@@ -4,7 +4,12 @@
   "type": "module",
   "scripts": {
     "dev": "node server.mjs",
+    "watch": "node scripts/fetch-course.mjs",
     "build": "node build.mjs",
-    "check": "node check.mjs"
+    "check": "node check.mjs",
+    "update": "node scripts/fetch-course.mjs && node check.mjs && node build.mjs"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
