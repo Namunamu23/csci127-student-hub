@@ -338,11 +338,11 @@ async function fetchAnnouncements(repo) {
   const issues = await getJson(`https://api.github.com/repos/${repo}/issues?labels=announcement&state=open&per_page=50`);
   return issues.filter((i) => !i.pull_request).map((i) => {
     const body = (i.body || "").replace(/\r/g, "");
-    const field = (name) => { const m = body.match(new RegExp(`###\\s*${name}\\s*\\n+([\\s\\S]*?)(?=\\n###|$)`, "i")); return m ? m[1].trim() : ""; };
+    const field = (name) => { const m = body.match(new RegExp(`###\\s*(?:${name})\\s*\\n+([\\s\\S]*?)(?=\\n###|$)`, "i")); return m && m[1] ? m[1].trim() : ""; };
     const date = field("Date") || i.created_at.slice(0, 10);
     const text = field("What it says|Announcement|Text|Details") || body.replace(/^###.*$/gm, "").trim();
     const link = field("Link") || "";
-    return { id: i.number, title: i.title.trim(), date: /^\d{4}-\d{2}-\d{2}/.test(date) ? date.slice(0, 10) : i.created_at.slice(0, 10), text: text.replace(/_No response_/g, "").trim().slice(0, 1200), link: /^https?:\/\//.test(link) ? link : "", url: i.html_url, addedAt: i.created_at, updatedAt: i.updated_at };
+    return { id: i.number, title: String(i.title || "Announcement").replace(/^\[Announcement\]\s*/i, "").trim(), date: /^\d{4}-\d{2}-\d{2}/.test(date) ? date.slice(0, 10) : i.created_at.slice(0, 10), text: text.replace(/_No response_/g, "").trim().slice(0, 1200), link: /^https?:\/\//.test(link) ? link : "", url: i.html_url, addedAt: i.created_at, updatedAt: i.updated_at };
   }).sort((a, b) => (b.date + b.addedAt).localeCompare(a.date + a.addedAt));
 }
 

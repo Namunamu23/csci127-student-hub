@@ -1,7 +1,18 @@
 {
-  "updatedAt": "2026-09-07T00:00:00Z",
+  "updatedAt": "2026-09-07T04:06:52.804Z",
   "note": "Added by hand from Brightspace. This site does not read Brightspace itself.",
   "items": [
+    {
+      "id": 1,
+      "title": "Week 2 Announcements",
+      "date": "2026-09-04",
+      "text": "Today, Friday, September 4:\n\n  *   The dedicated CSCI 127 lab is open 11:30-4pm (shorter hours on Fridays).\n  *   Need some help getting started?  The lab is staffed with amazing peer instructors who will guide you through the first lab and homework.\n  *   Come in today and earn an extra 5% on your written quiz and oral code review for completing them early.\n  *   Appointments available via Navigate or drop in for the next available slot.\n  *   We use Gradescope for submitting and grading coursework.  An invitation was sent to your CUNY account (e.g. first.last##@login.cuny.edu).  If you didn't get a Gradescope invitation, fill out the Request for Gradescope Account.<https://brightspace.cuny.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou=1315489&type=survey&rCode=553F80D6-3EB2-4A0C-B321-7D8FDFC0E4FA-9238746>\n\nMonday, September 7:\n\n  *   The college is closed due to the Labor Day holiday.\n  *   You can still access the homework and submit via Gradescope, but no tutoring is available since the college is closed.\n\nTuesday, September 8:\n\n  *   Worried about taking quizzes?  Come early to lecture for a focused session on topics and review for the next quizzes.  We will start with str",
+      "link": "",
+      "url": "https://github.com/Namunamu23/csci127-student-hub/issues/1",
+      "addedAt": "2026-09-07T04:03:56Z",
+      "updatedAt": "2026-09-07T04:03:56Z",
+      "source": "issue"
+    },
     {
       "id": "maint-2026-09-04",
       "source": "maintainer",

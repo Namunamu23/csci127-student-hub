@@ -1,15 +1,15 @@
 {
-  "lastRunAt": "2026-09-07T02:55:28.899Z",
+  "lastRunAt": "2026-09-07T04:06:52.804Z",
   "courseRepo": {
     "sha": "674d8d440d76c031c336612bd5f7951361a9b9bd",
     "committedAt": "2026-09-04T17:43:59Z",
-    "checkedAt": "2026-09-07T02:55:28.899Z",
+    "checkedAt": "2026-09-07T04:06:52.804Z",
     "url": "https://github.com/HunterCSci127/HunterCSci127.github.io/commits/master"
   },
   "sources": {
     "home": {
       "url": "https://huntercsci127.github.io/f26.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "972ebc9a448f6704",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -17,7 +17,7 @@
     },
     "coursework": {
       "url": "https://huntercsci127.github.io/f26/cw.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "05dc056113533c0d",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -25,7 +25,7 @@
     },
     "homework": {
       "url": "https://huntercsci127.github.io/f26/ps.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "6e6d62f15d194ea5",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -33,7 +33,7 @@
     },
     "syllabus": {
       "url": "https://huntercsci127.github.io/f26/syl.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "730efe6bcd6cebb2",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -41,7 +41,7 @@
     },
     "resources": {
       "url": "https://huntercsci127.github.io/f26/resources.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "b7b7114c68a79f27",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -49,7 +49,7 @@
     },
     "faq": {
       "url": "https://huntercsci127.github.io/f26/faq.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "eb82964a3a44a0ee",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -57,7 +57,7 @@
     },
     "lab0": {
       "url": "https://huntercsci127.github.io/f26/lab0.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "096c05291c056dd8",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -65,7 +65,7 @@
     },
     "lab1": {
       "url": "https://huntercsci127.github.io/f26/lab1.html",
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "ok": true,
       "sha": "16a81563c333dc9c",
       "changedAt": "2026-09-07T02:55:28.899Z",
@@ -74,9 +74,14 @@
     "hunterCalendar": {
       "url": "https://hunter.cuny.edu/students/registration/academic-calendar/",
       "ok": true,
-      "checkedAt": "2026-09-07T02:55:28.899Z",
+      "checkedAt": "2026-09-07T04:06:52.804Z",
       "changedAt": "2026-09-07T02:55:28.899Z",
       "entries": 40
+    },
+    "announcements": {
+      "ok": true,
+      "checkedAt": "2026-09-07T04:06:52.804Z",
+      "count": 3
     }
   },
   "validation": {
