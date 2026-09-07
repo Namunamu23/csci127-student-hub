@@ -1,6 +1,6 @@
 .npm-cache/
 node_modules/
 dist/
-Claude outputs/
+*outputs/
 *.tar.gz
 
