@@ -449,16 +449,57 @@
     $("#checklist-count").textContent = `${upcoming.length} dated items ahead, generated from the course pages.`;
   }
 
+  function shortUrl(url) {
+    try {
+      const u = new URL(url);
+      if (/brightspace\.cuny\.edu/i.test(u.host)) return "Brightspace link (login)";
+      if (/huntercsci127\.github\.io/i.test(u.host)) return "course site: " + u.pathname.replace(/^\/(f26\/)?/, "") + (u.hash || "");
+      return u.host.replace(/^www\./, "") + (u.pathname !== "/" ? u.pathname : "");
+    } catch (_) { return url; }
+  }
+  function linkify(text) {
+    const nodes = []; const re = /<?(https?:\/\/[^\s<>]+)>?/g; let last = 0; let m;
+    const clean = text.replace(/<mailto:[^>]+>/gi, "");
+    while ((m = re.exec(clean))) {
+      nodes.push(clean.slice(last, m.index));
+      const url = m[1].replace(/[.,;)]+$/, "");
+      nodes.push(" "); nodes.push(linkEl({ href: url, label: shortUrl(url) }, "inline-link"));
+      last = m.index + m[0].length;
+    }
+    nodes.push(clean.slice(last));
+    return nodes;
+  }
+  function announcementBody(text) {
+    const lines = (text || "").replace(/\r/g, "").split("\n").map((l) => l.replace(/\s+$/, ""));
+    const blocks = []; let list = null;
+    lines.forEach((raw) => {
+      const line = raw.trim();
+      if (!line) { list = null; return; }
+      const bullet = line.match(/^(?:[*\-•]|\d+[.)])\s+(.*)$/);
+      if (bullet) { if (!list) { list = el("ul", { class: "announcement-list" }); blocks.push(list); } list.appendChild(el("li", null, linkify(bullet[1]))); return; }
+      list = null;
+      blocks.push(el("p", { class: /^[^.]{2,70}:$/.test(line) ? "announcement-heading" : "announcement-p" }, linkify(line)));
+    });
+    const root = el("div", { class: "announcement-body" });
+    const visible = 4;
+    if (blocks.length <= visible + 1) { blocks.forEach((b) => root.appendChild(b)); return root; }
+    blocks.slice(0, visible).forEach((b) => root.appendChild(b));
+    const rest = el("details", { class: "task-details announcement-more" }, [el("summary", null, [icon("chevron", "chevron"), "Show the rest of this announcement"])]);
+    blocks.slice(visible).forEach((b) => rest.appendChild(b));
+    root.appendChild(rest);
+    return root;
+  }
   function renderAnnouncements() {
     const list = $("#announcement-list"); list.textContent = "";
     const ann = BUNDLE.announcements || { items: [] };
     const items = (ann.items || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
     if (!items.length) list.appendChild(el("li", { class: "fine-print", text: "No announcements have been added yet." }));
     items.forEach((a) => {
+      const origin = a.auto ? "Copied automatically from a Brightspace notification e-mail" : a.source === "issue" ? "Added by a classmate through GitHub" : "Added by the site maintainer" + (a.checkedAt ? ` (checked ${fmtIsoDay(a.checkedAt)})` : "");
       list.appendChild(el("li", { class: "missed-item announcement", dataset: { item: "", category: "info", search: searchText("announcement brightspace", a.title, a.text, a.date) } }, [
         el("div", { class: "missed-head" }, [icon("globe", "missed-icon"), el("h3", { class: "missed-title", text: a.title }), el("span", { class: "meta-chip", text: a.date ? fmtIsoDay(a.date) : "" })]),
-        a.text ? el("p", { class: "missed-check", text: a.text }) : null,
-        el("p", { class: "fine-print" }, [a.source === "issue" ? "Added by a classmate through GitHub" : "Added by the site maintainer" + (a.checkedAt ? ` (checked ${fmtIsoDay(a.checkedAt)})` : ""), a.link ? [" · ", linkEl({ href: a.link, label: "Open on Brightspace (login)" }, "inline-link")] : null, a.url ? [" · ", linkEl({ href: a.url, label: "Discussion" }, "inline-link")] : null])
+        a.text ? announcementBody(a.text) : null,
+        el("p", { class: "fine-print" }, [origin, a.link ? [" · ", linkEl({ href: a.link, label: "Open on Brightspace (login)" }, "inline-link")] : null, a.url ? [" · ", linkEl({ href: a.url, label: "View or fix on GitHub" }, "inline-link")] : null])
       ]));
     });
     $("#announcement-updated").textContent = ann.updatedAt ? `List last rebuilt ${fmtStamp.format(new Date(ann.updatedAt))} ET.` : "";
