@@ -67,6 +67,7 @@ function testOnLatest() {
     thread.getMessages().forEach(function (msg) {
       var parsed = parseMessage_(msg);
       Logger.log(parsed ? JSON.stringify(parsed, null, 2) : "(skipped: " + msg.getSubject() + ")");
+      Logger.log("Brightspace links in this e-mail: " + JSON.stringify(brightspaceLinks_(msg)));
     });
   });
   if (!threads.length) Logger.log("No matching e-mails in the last 30 days. Check GMAIL_SEARCH and your Brightspace notification settings.");
@@ -78,8 +79,10 @@ function parseMessage_(msg) {
   var subject = msg.getSubject() || "";
   var html = unwrapSafeLinks_(msg.getBody() || "");
   var text = unwrapSafeLinks_(msg.getPlainBody() || html.replace(/<[^>]+>/g, " "));
-  var links = ((html + "\n" + text).match(/https?:\/\/brightspace\.cuny\.edu\/d2l\/[^"'\s<>]+/g) || []).map(function (u) { return u.replace(/&amp;/g, "&"); });
-  var newsLink = links.filter(function (u) { return u.indexOf("/le/news/" + COURSE_ORG_UNIT + "/") >= 0; })[0] || "";
+  var links = brightspaceLinks_(msg);
+  // Best link first: the announcement itself, else the course's announcement list, else nothing (course home is used later).
+  var newsLink = links.filter(function (u) { return u.indexOf("/le/news/" + COURSE_ORG_UNIT + "/") >= 0; })[0]
+    || links.filter(function (u) { return /news/i.test(u) && u.indexOf(COURSE_ORG_UNIT) >= 0; })[0] || "";
   var isCourse = Boolean(newsLink) || links.some(function (u) { return u.indexOf(COURSE_ORG_UNIT) >= 0; }) || COURSE_WORDS.test(subject) || COURSE_WORDS.test(text.slice(0, 2000));
   if (!isCourse) return null;
   if (/activity summary|summary of activity|digest|submission receipt|due date|end date|content item|feedback|grade/i.test(subject)) return null;   // other notification types
@@ -113,6 +116,17 @@ function parseMessage_(msg) {
   var date = postedDate || Utilities.formatDate(msg.getDate(), "America/New_York", "yyyy-MM-dd");
   var key = newsId ? "news-" + newsId : "post-" + date + "-" + title.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 60);
   return { key: key, title: title.slice(0, 120), date: date, text: summary, link: newsLink || COURSE_HOME };
+}
+
+// Every distinct Brightspace link in the e-mail (HTML and plain-text parts), safe-links unwrapped.
+function brightspaceLinks_(msg) {
+  var html = unwrapSafeLinks_(msg.getBody() || ""), text = unwrapSafeLinks_(msg.getPlainBody() || "");
+  var seen = {}, out = [];
+  ((html + "\n" + text).match(/https?:\/\/brightspace\.cuny\.edu\/[^"'\s<>]+/g) || []).forEach(function (u) {
+    u = u.replace(/&amp;/g, "&").replace(/[.,;)]+$/, "");
+    if (!seen[u]) { seen[u] = 1; out.push(u); }
+  });
+  return out;
 }
 
 // Outlook rewrites links as https://urldefense.com/v3/__REAL__;...$ — put the real address back.

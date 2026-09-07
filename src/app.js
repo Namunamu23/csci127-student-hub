@@ -486,7 +486,8 @@
     items.forEach((a) => {
       const summary = announcementSummary(a.text);
       const origin = a.auto ? "Summary posted automatically from a Brightspace notification e-mail" : a.source === "issue" ? "Summary added by a classmate through GitHub" : "Summary added by the site maintainer" + (a.checkedAt ? ` (checked ${fmtIsoDay(a.checkedAt)})` : "");
-      const readLink = linkEl({ href: a.link || DATA.LINKS.brightspace.href, label: a.link ? "Read the full announcement on Brightspace (login)" : "Read it on Brightspace (login)" }, "link");
+      const direct = /\/news\/\d+\/\d+\//.test(a.link || "");
+      const readLink = linkEl({ href: a.link || DATA.LINKS.brightspace.href, label: direct ? "Read the full announcement on Brightspace (login)" : "Open Announcements on Brightspace (login)" }, "link");
       list.appendChild(el("li", { class: "missed-item announcement", dataset: { item: "", category: "info", search: searchText("announcement brightspace", a.title, summary, a.date) } }, [
         el("div", { class: "missed-head" }, [icon("globe", "missed-icon"), el("h3", { class: "missed-title", text: a.title }), el("span", { class: "meta-chip", text: a.date ? fmtIsoDay(a.date) : "" })]),
         summary ? el("p", { class: "announcement-summary" }, linkify(summary)) : null,
