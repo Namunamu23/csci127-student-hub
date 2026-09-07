@@ -81,3 +81,11 @@ commit counts, and the *Run workflow* button restarts them.
   deadline, the optional pre-lecture review) live in `RULES` in `src/data.js` with the
   announcement cited. Mark anything uncertain with `verify`.
 - Never add personal grades, names, account data, or private course documents.
+
+## Optional: automatic announcements from Brightspace e-mails
+
+Brightspace can e-mail you every new announcement. `scripts/gmail-bridge.gs` is a Google
+Apps Script that watches that Gmail inbox and opens the announcement issue for you, so
+announcements reach the hub with no clicks. Setup steps are at the top of the file. It needs
+only a fine-grained GitHub token limited to *Issues: read and write* on this repository; your
+Brightspace login is never stored anywhere.

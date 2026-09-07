@@ -89,8 +89,8 @@
     focusDays: 3,                 // "Do this first" = everything due within this many days
     missedDays: 14,               // "Might have missed" looks back this far
     lecture: { weekday: 2, start: "10:00", end: "11:15", label: "Tuesdays 10:00–11:15 am", where: "lecture" },
-    preLecture: { label: "Optional focused review", time: "9:30–10:00 am", where: "lecture", text: "A short review before lecture in 118 HN, announced for week 2. Check Brightspace to see whether it continues each week.", source: "week2Announcement", verify: "Announced for September 8; confirm on Brightspace for later weeks." },
-    assessmentDeadline: { time: "17:00", label: "5:00 pm", text: "Quizzes and code reviews must be finished by 5:00 pm on the last day of their window.", source: "week2Announcement", verify: "From the Sep 4 announcement (week 2). The public calendar only gives the end date." },
+    preLecture: { label: "Optional focused review", time: "9:30–10:00 am", where: "lecture", text: "Strategies and sample questions for the upcoming quizzes, in the lecture hall (118 HN). The Sep 4 announcement says these run most Tuesdays through the semester.", source: "week2Announcement", verify: "\"Most Tuesdays\" — a week can be skipped; Brightspace announcements are the source." },
+    assessmentDeadline: { time: "17:00", label: "5:00 pm", text: "Quizzes and code reviews must be finished by 5:00 pm on the last day of their window.", source: "week2Announcement", verify: "The Sep 4 announcement set 5 pm for Quiz 1 / Code Review 1; the hub assumes the same for later weeks. The public calendar only gives the end date." },
     labHours: {
       byWeekday: { 1: "11:30 am–5:15 pm", 2: "11:30 am–5:15 pm", 3: "11:30 am–5:15 pm", 4: "11:30 am–5:15 pm", 5: "11:30 am–4:00 pm" },
       text: "Monday–Thursday 11:30 am–5:15 pm; Friday 11:30 am–4:00 pm, when classes meet",
