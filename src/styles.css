@@ -421,11 +421,6 @@ h1 { max-width: 800px; margin-bottom: .8rem; font-size: clamp(2.5rem, 6vw, 4.6re
 .announcement .meta-chip { margin-left: auto; }
 @media (max-width: 860px) { .day-cards { grid-template-columns: 1fr; } }
 
-/* announcements */
-.announcement-body { margin: .35rem 0 .5rem; font-size: .93rem; color: var(--ink); }
-.announcement-body .announcement-p { margin: 0 0 .5rem; }
-.announcement-body .announcement-heading { margin: .6rem 0 .3rem; font-weight: 800; }
-.announcement-list { margin: 0 0 .6rem; padding-left: 1.25rem; }
-.announcement-list li { margin-bottom: .3rem; }
-.announcement-more { margin-top: .2rem; }
-.announcement-more[open] { margin-bottom: .3rem; }
+/* announcements: summary + a clear way to the full text on Brightspace */
+.announcement-summary { margin: .35rem 0 .5rem; font-size: .93rem; color: var(--ink); }
+.announcement-read { margin: 0 0 .45rem; }

@@ -1,13 +1,14 @@
 name: Add a Brightspace announcement
-description: Paste a course announcement so it shows on the hub (the site cannot read Brightspace itself).
+description: Add a one-line summary of a course announcement so the hub shows it (the site cannot read Brightspace itself).
 title: "[Announcement] "
 labels: ["announcement"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks! Keep it to what the course said. No grades, names of other students, or personal details.
-        The hub shows the title, date and text below within a few hours. Closing this issue removes it from the hub.
+        Thanks! One or two sentences is plenty: the hub shows summaries only and sends readers to Brightspace for the full text.
+        No grades, names of other students, or personal details. The hub shows the title, date and summary below within a few
+        hours (long texts are cut to about 300 characters). Closing this issue removes it from the hub.
   - type: input
     id: date
     attributes:
@@ -20,7 +21,7 @@ body:
     id: text
     attributes:
       label: What it says
-      description: A short, faithful summary or the exact wording.
+      description: A short, faithful summary (one or two sentences). Not the whole announcement.
     validations:
       required: true
   - type: input

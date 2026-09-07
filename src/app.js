@@ -469,25 +469,14 @@
     nodes.push(clean.slice(last));
     return nodes;
   }
-  function announcementBody(text) {
-    const lines = (text || "").replace(/\r/g, "").split("\n").map((l) => l.replace(/\s+$/, ""));
-    const blocks = []; let list = null;
-    lines.forEach((raw) => {
-      const line = raw.trim();
-      if (!line) { list = null; return; }
-      const bullet = line.match(/^(?:[*\-•]|\d+[.)])\s+(.*)$/);
-      if (bullet) { if (!list) { list = el("ul", { class: "announcement-list" }); blocks.push(list); } list.appendChild(el("li", null, linkify(bullet[1]))); return; }
-      list = null;
-      blocks.push(el("p", { class: /^[^.]{2,70}:$/.test(line) ? "announcement-heading" : "announcement-p" }, linkify(line)));
-    });
-    const root = el("div", { class: "announcement-body" });
-    const visible = 4;
-    if (blocks.length <= visible + 1) { blocks.forEach((b) => root.appendChild(b)); return root; }
-    blocks.slice(0, visible).forEach((b) => root.appendChild(b));
-    const rest = el("details", { class: "task-details announcement-more" }, [el("summary", null, [icon("chevron", "chevron"), "Show the rest of this announcement"])]);
-    blocks.slice(visible).forEach((b) => rest.appendChild(b));
-    root.appendChild(rest);
-    return root;
+  // Announcements are shown as short summaries only; the wording lives on Brightspace (login).
+  const SUMMARY_CHARS = 320;
+  function announcementSummary(text) {
+    const flat = String(text || "").replace(/^\s*(?:[*\-•]|\d+[.)])\s+/gm, "").replace(/\s+/g, " ").trim();
+    if (flat.length <= SUMMARY_CHARS) return flat;
+    const cut = flat.slice(0, SUMMARY_CHARS);
+    const atSentence = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("? "), cut.lastIndexOf("! "));
+    return (atSentence > SUMMARY_CHARS * 0.4 ? cut.slice(0, atSentence + 1) : cut.replace(/\s+\S*$/, "").replace(/[,;:\s]+$/, "")) + " …";
   }
   function renderAnnouncements() {
     const list = $("#announcement-list"); list.textContent = "";
@@ -495,11 +484,14 @@
     const items = (ann.items || []).slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
     if (!items.length) list.appendChild(el("li", { class: "fine-print", text: "No announcements have been added yet." }));
     items.forEach((a) => {
-      const origin = a.auto ? "Copied automatically from a Brightspace notification e-mail" : a.source === "issue" ? "Added by a classmate through GitHub" : "Added by the site maintainer" + (a.checkedAt ? ` (checked ${fmtIsoDay(a.checkedAt)})` : "");
-      list.appendChild(el("li", { class: "missed-item announcement", dataset: { item: "", category: "info", search: searchText("announcement brightspace", a.title, a.text, a.date) } }, [
+      const summary = announcementSummary(a.text);
+      const origin = a.auto ? "Summary posted automatically from a Brightspace notification e-mail" : a.source === "issue" ? "Summary added by a classmate through GitHub" : "Summary added by the site maintainer" + (a.checkedAt ? ` (checked ${fmtIsoDay(a.checkedAt)})` : "");
+      const readLink = linkEl({ href: a.link || DATA.LINKS.brightspace.href, label: a.link ? "Read the full announcement on Brightspace (login)" : "Read it on Brightspace (login)" }, "link");
+      list.appendChild(el("li", { class: "missed-item announcement", dataset: { item: "", category: "info", search: searchText("announcement brightspace", a.title, summary, a.date) } }, [
         el("div", { class: "missed-head" }, [icon("globe", "missed-icon"), el("h3", { class: "missed-title", text: a.title }), el("span", { class: "meta-chip", text: a.date ? fmtIsoDay(a.date) : "" })]),
-        a.text ? announcementBody(a.text) : null,
-        el("p", { class: "fine-print" }, [origin, a.link ? [" · ", linkEl({ href: a.link, label: "Open on Brightspace (login)" }, "inline-link")] : null, a.url ? [" · ", linkEl({ href: a.url, label: "View or fix on GitHub" }, "inline-link")] : null])
+        summary ? el("p", { class: "announcement-summary" }, linkify(summary)) : null,
+        el("p", { class: "announcement-read" }, [readLink]),
+        el("p", { class: "fine-print" }, [origin, a.url ? [" · ", linkEl({ href: a.url, label: "View or fix on GitHub" }, "inline-link")] : null])
       ]));
     });
     $("#announcement-updated").textContent = ann.updatedAt ? `List last rebuilt ${fmtStamp.format(new Date(ann.updatedAt))} ET.` : "";

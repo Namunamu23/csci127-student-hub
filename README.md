@@ -24,6 +24,8 @@ official course website. This hub never reads Brightspace or Gradescope.
 3. **Announcements** that only exist inside Brightspace are added by people: open a GitHub
    issue with the *Add a Brightspace announcement* form (label `announcement`). The next run
    copies open announcement issues into `src/announcements.json`; closing the issue removes it.
+   The hub shows **summaries only** (title, date, one or two sentences, link): issue texts are
+   cut to about 300 characters and the full wording stays on Brightspace behind the login.
 4. `build.mjs` copies `src/` to `dist/` and bundles the JSON files into `dist/course.js`.
 5. The page (`src/app.js`) computes everything from today's date in New York time, so the
    focus list, day cards, "this week", checklist and "might have missed" rotate on their own
@@ -86,6 +88,7 @@ commit counts, and the *Run workflow* button restarts them.
 
 Brightspace can e-mail you every new announcement. `scripts/gmail-bridge.gs` is a Google
 Apps Script that watches that Gmail inbox and opens the announcement issue for you, so
-announcements reach the hub with no clicks. Setup steps are at the top of the file. It needs
-only a fine-grained GitHub token limited to *Issues: read and write* on this repository; your
-Brightspace login is never stored anywhere.
+announcements reach the hub with no clicks. It posts only the title, date, the first sentence
+or two and the Brightspace link; the full text never leaves the mailbox. Setup steps are at
+the top of the file. It needs only a fine-grained GitHub token limited to *Issues: read and
+write* on this repository; your Brightspace login is never stored anywhere.

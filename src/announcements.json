@@ -1,27 +1,16 @@
 {
-  "updatedAt": "2026-09-07T04:21:51.672Z",
-  "note": "Added by hand from Brightspace. This site does not read Brightspace itself.",
+  "updatedAt": "2026-09-07T12:00:00Z",
+  "note": "Short summaries only. The full text of each announcement is on Brightspace (login); this site does not read Brightspace itself.",
   "items": [
     {
       "id": 1,
-      "title": "Week 2 Announcements",
-      "date": "2026-09-04",
-      "text": "Today, Friday, September 4:\n\n  *   The dedicated CSCI 127 lab is open 11:30-4pm (shorter hours on Fridays).\n  *   Need some help getting started?  The lab is staffed with amazing peer instructors who will guide you through the first lab and homework.\n  *   Come in today and earn an extra 5% on your written quiz and oral code review for completing them early.\n  *   Appointments available via Navigate or drop in for the next available slot.\n  *   We use Gradescope for submitting and grading coursework.  An invitation was sent to your CUNY account (e.g. first.last##@login.cuny.edu).  If you didn't get a Gradescope invitation, fill out the Request for Gradescope Account.<https://brightspace.cuny.edu/d2l/common/dialogs/quickLink/quickLink.d2l?ou=1315489&type=survey&rCode=553F80D6-3EB2-4A0C-B321-7D8FDFC0E4FA-9238746>\n\nMonday, September 7:\n\n  *   The college is closed due to the Labor Day holiday.\n  *   You can still access the homework and submit via Gradescope, but no tutoring is available since the college is closed.\n\nTuesday, September 8:\n\n  *   Worried about taking quizzes?  Come early to lecture for a focused session on topics and review for the next quizzes.  We will start with strategies and then work through sample questions.  These sessions will run most Tuesdays through the semester, 9:30-10am in the lecture hall (118 HN).\n  *   Our lecture is in-person in 10-11:15am, 118 HN (Assembly Hall, 1st floor North Building, main entrance behind security desk).  This week’s focus is more on loops and strings, as well as introducing console I/O and ASCII representation.\n  *   The first homework is due 5pm (submitted via Gradescope).\n  *   Quiz 1 and Code Review 1 are also due at 5pm.  Schedule an appointment via Navigate or drop in and wait for the next available slot in 1001E.\n\nWhat's next:\n\nHere's some other things to do this week:\n\n  *   Read through Lab 2<https://huntercsci127.github.io/f26/lab2.html>.  It has more details on this week's lecture and is very useful for completing the upcoming homework.\n  *   Work ahead the Homework<https://huntercsci127.github.io/f26/ps.html>:  we have short assignments due most weekdays that you can submit up to a month early.\n  *   Come in early for Quiz 2 and Code Review 2.  We give extra credit for completing the in-person assessments early.  See the calendar<https://huntercsci127.github.io/f26/cw.html#calendar> for topics, due dates, and extra credit opportunities.\n\nQuestions?\n\nSend email to our dedicated course account:  csci127@hunter.cuny.edu<mailto:csci127@hunter.cuny.edu>.  It is monitored by multiple instructors for the course, so, mail sent there will be answered sooner than sending it to personal accounts of faculty.\n\nEnjoy the Labor Day weekend!\n\n--CSCI 127 Teaching Staff",
-      "link": "",
-      "url": "https://github.com/Namunamu23/csci127-student-hub/issues/1",
+      "source": "issue",
       "auto": true,
-      "addedAt": "2026-09-07T04:03:56Z",
-      "updatedAt": "2026-09-07T04:03:56Z",
-      "source": "issue"
-    },
-    {
-      "id": "maint-2026-09-04",
-      "source": "maintainer",
       "date": "2026-09-04",
-      "title": "Week 2: Tuesday review session and 5 pm deadlines",
-      "text": "Optional focused review Tuesday 9:30–10:00 am in 118 HN before lecture. Homework 1, Quiz 1 and Code Review 1 are due by 5:00 pm on Tuesday, September 8.",
+      "title": "Week 2 Announcements",
+      "text": "Lab open Friday 11:30–4 with peer instructors, and 5% extra credit for finishing Quiz 1 and Code Review 1 early. Monday Sep 7 the college is closed (Labor Day). Tuesday Sep 8: optional quiz review 9:30–10 am in 118 HN, and Homework 1 is due 5 pm on Gradescope.",
       "link": "https://brightspace.cuny.edu/d2l/le/news/1315489/6464172/view",
-      "checkedAt": "2026-09-06"
+      "url": "https://github.com/Namunamu23/csci127-student-hub/issues/1"
     },
     {
       "id": "maint-2026-08-28",

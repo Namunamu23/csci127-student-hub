@@ -334,17 +334,27 @@ function parseHunterCalendar(html) {
 }
 
 /* ---------- announcements from GitHub issues ---------- */
+// The hub shows a short summary of each announcement, never the full text: the
+// wording stays on Brightspace (login). Long issue texts are cut to SUMMARY_CHARS.
+const SUMMARY_CHARS = 320;
+function summarize(text, max = SUMMARY_CHARS) {
+  const flat = String(text || "").replace(/^\s*(?:[*\-•]|\d+[.)])\s+/gm, "").replace(/\s+/g, " ").trim();
+  if (flat.length <= max) return flat;
+  const cut = flat.slice(0, max);
+  const atSentence = Math.max(cut.lastIndexOf(". "), cut.lastIndexOf("? "), cut.lastIndexOf("! "));
+  const head = atSentence > max * 0.4 ? cut.slice(0, atSentence + 1) : cut.replace(/\s+\S*$/, "").replace(/[,;:\s]+$/, "");
+  return head + " …";
+}
 async function fetchAnnouncements(repo) {
   const issues = await getJson(`https://api.github.com/repos/${repo}/issues?labels=announcement&state=open&per_page=50`);
   return issues.filter((i) => !i.pull_request).map((i) => {
-    const body = (i.body || "").replace(/\r/g, "");
+    const auto = /Posted automatically from a Brightspace notification/i.test(i.body || "");
+    const body = (i.body || "").replace(/\r/g, "").replace(/^_?Posted automatically from a Brightspace notification e-mail\.[^\n]*$/gim, "").replace(/_No response_/g, "");
     const field = (name) => { const m = body.match(new RegExp(`###\\s*(?:${name})\\s*\\n+([\\s\\S]*?)(?=\\n###|$)`, "i")); return m && m[1] ? m[1].trim() : ""; };
     const date = field("Date") || i.created_at.slice(0, 10);
     const text = field("What it says|Announcement|Text|Details") || body.replace(/^###.*$/gm, "").trim();
-    const link = field("Link") || "";
-    const auto = /Posted automatically from a Brightspace notification/i.test(body);
-    const cleanText = text.replace(/_No response_/g, "").replace(/_?Posted automatically from a Brightspace notification e-mail\._?/i, "").trim().slice(0, 6000);
-    return { id: i.number, title: String(i.title || "Announcement").replace(/^\[Announcement\]\s*/i, "").trim(), date: /^\d{4}-\d{2}-\d{2}/.test(date) ? date.slice(0, 10) : i.created_at.slice(0, 10), text: cleanText, link: /^https?:\/\//.test(link) ? link : "", url: i.html_url, auto, addedAt: i.created_at, updatedAt: i.updated_at };
+    const link = (field("Link").split(/\s+/)[0] || "").replace(/^<|>$/g, "");
+    return { id: i.number, title: String(i.title || "Announcement").replace(/^\[Announcement\]\s*/i, "").trim(), date: /^\d{4}-\d{2}-\d{2}/.test(date) ? date.slice(0, 10) : i.created_at.slice(0, 10), text: summarize(text), link: /^https?:\/\//.test(link) ? link : "", url: i.html_url, auto, addedAt: i.created_at, updatedAt: i.updated_at };
   }).sort((a, b) => (b.date + b.addedAt).localeCompare(a.date + a.addedAt));
 }
 
@@ -528,7 +538,7 @@ if (repo) {
     const items = await fetchAnnouncements(repo);
     const prevAnn = await readJson("announcements.json", { items: [] });
     const manual = (prevAnn.items || []).filter((a) => a.source === "maintainer");
-    const merged = { updatedAt: now, note: "Added by hand from Brightspace. This site does not read Brightspace itself.", items: [...items.map((a) => ({ ...a, source: "issue" })), ...manual] };
+    const merged = { updatedAt: now, note: "Short summaries only. The full text of each announcement is on Brightspace (login); this site does not read Brightspace itself.", items: [...items.map((a) => ({ ...a, source: "issue" })), ...manual] };
     const same = JSON.stringify((prevAnn.items || []).map((a) => [a.id, a.title, a.text, a.date])) === JSON.stringify(merged.items.map((a) => [a.id, a.title, a.text, a.date]));
     if (!same) { await writeJson("announcements.json", merged); changed = true; log(`announcements: ${items.length} from issues`); }
     status.sources.announcements = { ok: true, checkedAt: now, count: merged.items.length };
