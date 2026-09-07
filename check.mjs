@@ -13,7 +13,7 @@ const sandbox = { window: {} };
 vm.runInNewContext(await read("./src/data.js"), sandbox);
 const data = sandbox.window.CSCI127_DATA;
 if (!data) { console.error("data.js did not define window.CSCI127_DATA"); process.exit(1); }
-const { LINKS, PLACES, CATEGORIES, RULES, TEMPLATES, STANDING, TOOLBOX, SOFTWARE, MISSED_CHECKS, SOURCES, GRADING_EXTRA, AI_POLICY, LAB, QUESTIONS, CAMPUS_DAY } = data;
+const { LINKS, PLACES, CATEGORIES, RULES, TEMPLATES, STANDING, TOOLBOX, SOFTWARE, MISSED_CHECKS, SOURCES, GRADING_EXTRA, AI_POLICY, LAB, CAMPUS_DAY } = data;
 
 function checkUrl(href, where) {
   try {
@@ -78,11 +78,11 @@ for (const name of ["changes.json", "status.json", "announcements.json"]) {
 
 /* ---------- html ---------- */
 const html = await read("./src/index.html");
-QUESTIONS.forEach((q) => { if (!html.includes(`id="${q.target}"`)) note(`QUESTIONS "${q.q}" points to missing section #${q.target}`); });
 for (const match of html.matchAll(/href="(https?:[^"]+)"/g)) checkUrl(match[1], "index.html");
 for (const match of html.matchAll(/href="#([^"]+)"/g)) { if (!html.includes(`id="${match[1]}"`)) note(`index.html: anchor #${match[1]} has no target`); }
+["home", "all", "announcements", "toolbox", "grading", "lab", "software", "sources"].forEach((id) => { if (!html.includes(`id="${id}" data-screen`)) note(`index.html is missing screen #${id}`); });
 ["data.js", "course.js", "app.js", "styles.css"].forEach((file) => { if (!html.includes(file)) note(`index.html does not reference ${file}`); });
-["focus-before", "focus-tuesday", "day-cards", "campus-timeline", "week-body-content", "task-list", "announcement-list", "toolbox-grid", "grading-weights", "lab-where", "software-phases", "ai-allowed", "missed-list", "status-sources", "change-list", "source-list"].forEach((id) => { if (!html.includes(`id="${id}"`)) note(`index.html is missing #${id}, which app.js renders into`); });
+["now", "next", "rest", "week-strip", "week-plan", "task-list", "missed-list", "announcement-list", "toolbox-grid", "grading-weights", "grading-final", "ai-allowed", "campus-timeline", "campus-bring", "lab-where", "lab-services", "lab-closures", "software-phases", "source-list", "status-sources", "change-list", "today", "progress-label", "search", "filter-row", "reset-progress"].forEach((id) => { if (!html.includes(`id="${id}"`)) note(`index.html is missing #${id}, which app.js renders into`); });
 
 console.log(`Checked ${Object.keys(LINKS).length} links, ${STANDING.length} standing reminders, ${TOOLBOX.length} toolbox entries` + (course ? `, ${course.homework.length} homework items, ${course.windows.length} windows, ${course.weeks.length} weeks` : "") + ".");
 if (problems.length) { console.error("\nProblems:\n - " + problems.join("\n - ")); process.exit(1); }

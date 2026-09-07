@@ -3,9 +3,14 @@
 An unofficial, ADHD-friendly dashboard for Hunter College CSCI 127, Fall 2026 — live at
 <https://namunamu23.github.io/csci127-student-hub/>.
 
-It answers, for *today*: what to do first, what is due and where, what is happening on
-campus, which website to use, and what you might have missed. Checkmarks are saved in the
-visitor's own browser only. No login, analytics, or tracking.
+The home screen answers one question for *today*: what do I do next, and where. It shows
+one "Now" card, up to three "Next" items, a seven-day strip and a short list of links.
+Everything else (all deadlines with search, announcements, which website for what, grading
+and rules, lab and campus days, software setup, sources) lives on its own screen, reached
+by a hash such as `#all`. The design follows a calm, ADHD-friendly rule set: one typeface,
+three sizes, two weights, five colours, no icons, no motion, nothing sticky, and nothing
+hidden behind an icon — every disclosure is a labelled text link. Checkmarks are saved in
+the visitor's own browser only. No login, analytics, or tracking.
 
 Course requirements must always be confirmed against Brightspace, Gradescope, and the
 official course website. This hub never reads Brightspace or Gradescope.
@@ -27,9 +32,10 @@ official course website. This hub never reads Brightspace or Gradescope.
    The hub shows **summaries only** (title, date, one or two sentences, link): issue texts are
    cut to about 300 characters and the full wording stays on Brightspace behind the login.
 4. `build.mjs` copies `src/` to `dist/` and bundles the JSON files into `dist/course.js`.
-5. The page (`src/app.js`) computes everything from today's date in New York time, so the
-   focus list, day cards, "this week", checklist and "might have missed" rotate on their own
-   even between runs.
+5. The page (`src/app.js`) computes everything from today's date in New York time, so
+   Now, Next, the week strip, the deadline list and "might have missed" rotate on their own
+   even between runs. Checking an item never moves things while you look at them: Now and
+   Next are recomputed the next time the home screen is opened or the day changes.
 
 The GitHub Actions workflow `.github/workflows/course-watch.yml` runs all of this four times a
 day (03:17, 09:17, 15:17, 21:17 UTC), on every push to `main`, whenever an announcement issue

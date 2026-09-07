@@ -322,19 +322,6 @@
     { key: "hubRepo", note: "Where this page's code and update log live." }
   ];
 
-  const QUESTIONS = [
-    { q: "What must I do first?", target: "first" },
-    { q: "What is due, when, and where?", target: "checklist" },
-    { q: "What is happening today and tomorrow?", target: "days" },
-    { q: "What do I bring to campus?", target: "days" },
-    { q: "What is this week about?", target: "week" },
-    { q: "Which website do I use for what?", target: "toolbox" },
-    { q: "What software will I need?", target: "software" },
-    { q: "How is the course graded?", target: "grading" },
-    { q: "What might I have missed?", target: "missed" },
-    { q: "Is this page up to date?", target: "updates" }
-  ];
-
   window.CSCI127_DATA = {
     meta: {
       course: "CSCI 127: Introduction to Computer Science",
@@ -342,6 +329,6 @@
       timeZone: "America/New_York",
       lastReviewed: "2026-09-07"
     },
-    LINKS, PLACES, CATEGORIES, RULES, TEMPLATES, STANDING, CAMPUS_DAY, TOOLBOX, GRADING_NOTES, GRADING_EXTRA, LAB, SOFTWARE, AI_POLICY, MISSED_CHECKS, SOURCES, QUESTIONS
+    LINKS, PLACES, CATEGORIES, RULES, TEMPLATES, STANDING, CAMPUS_DAY, TOOLBOX, GRADING_NOTES, GRADING_EXTRA, LAB, SOFTWARE, AI_POLICY, MISSED_CHECKS, SOURCES
   };
 })();

@@ -3,422 +3,184 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An unofficial, student-friendly dashboard for Hunter College CSCI 127, Fall 2026: what to do first, what is due, where to do it, and which site to use — updated from the official course pages.">
-  <meta name="theme-color" content="#14213d">
+  <meta name="description" content="An unofficial, calm dashboard for Hunter College CSCI 127, Fall 2026: what to do next, where, and by when — updated from the official course pages.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f7f5">
   <meta name="referrer" content="no-referrer">
-  <title>CSCI 127 Student Hub · Fall 2026</title>
+  <title>CSCI 127 · what to do next</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <svg hidden aria-hidden="true" focusable="false">
-    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-external" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 10h17M8 3v4M16 3v4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7.5V12l3 2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V5M7.5 9.5L12 5l4.5 4.5M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
-    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5zM4 20.5V5.5M6.5 18H20v3H6.5a1.5 1.5 0 0 1 0-3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h8l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM14 3v5h5M8.5 13h7M8.5 17h7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="4.5" cy="6" r="1.4" fill="currentColor"/><circle cx="4.5" cy="12" r="1.4" fill="currentColor"/><circle cx="4.5" cy="18" r="1.4" fill="currentColor"/></symbol>
-    <symbol id="i-flask" viewBox="0 0 24 24"><path d="M9.5 3h5M10 3v6l-5.5 9.5A1.5 1.5 0 0 0 5.8 21h12.4a1.5 1.5 0 0 0 1.3-2.5L14 9V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14.5 6.5a4 4 0 0 0 5 5L9 22l-3-3L16.5 8.5zM3 5l3-3 3.5 3.5-3 3z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.7.4-1 .9-1 1.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.1" fill="currentColor"/></symbol>
-    <symbol id="i-people" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.2 3.2 0 0 1 0 7M21 20a6 6 0 0 0-4-5.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
-    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3.5l9.5 16.5h-19z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 10v4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17.3" r="1.1" fill="currentColor"/></symbol>
-    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
-    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.5-5.8M4 4v5h5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
-    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11v5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="8" r="1.1" fill="currentColor"/></symbol>
-    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l2 5.5L19.5 10 14 12l-2 5.5L10 12 4.5 10 10 8.5zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z" fill="currentColor"/></symbol>
-    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
-    <symbol id="i-robot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 4v4M8 19v2M16 19v2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="13" r="1.3" fill="currentColor"/><circle cx="15" cy="13" r="1.3" fill="currentColor"/></symbol>
-    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M7 16V9M12 16V5M17 16v-6" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
-    <symbol id="i-laptop" viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 19h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
-  </svg>
-
-  <header class="topbar">
-    <a class="brand" href="#main" aria-label="CSCI 127 Student Hub, back to top">
-      <span class="brand-mark" aria-hidden="true">127</span>
-      <span class="brand-text">Student Hub</span>
-    </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-      <svg class="icon" aria-hidden="true"><use href="#i-list"/></svg>
-      <span>Sections</span>
-    </button>
-    <nav id="site-nav" class="site-nav" aria-label="Sections">
-      <a href="#first">Do first</a>
-      <a href="#days">Today</a>
-      <a href="#week">This week</a>
-      <a href="#checklist">Checklist</a>
-      <a href="#announcements">Announcements</a>
-      <a href="#toolbox">Toolbox</a>
-      <a href="#grading">Grading</a>
-      <a href="#lab">Lab</a>
-      <a href="#software">Software</a>
-      <a href="#ai">AI policy</a>
-      <a href="#missed">Missed?</a>
-      <a href="#updates">Updates</a>
-    </nav>
-  </header>
-
   <main id="main" tabindex="-1">
-    <section class="hero" aria-labelledby="page-title">
-      <div class="hero-copy">
-        <p class="eyebrow" id="hero-eyebrow">Hunter College · CSCI 127 · Fall 2026</p>
-        <h1 id="page-title">CSCI 127, in one place.</h1>
-        <p class="lede">What to do first, what is due, where to do it, and which site to use. Short answers, official links — refreshed from the course pages automatically.</p>
-        <p class="today" id="today" aria-live="off">Times shown in New York time.</p>
-        <p class="data-stamp" id="data-stamp"></p>
+
+    <!-- Home: Now / Next / This week / Everything else -->
+    <section class="screen" id="home" data-screen aria-labelledby="home-title">
+      <p class="course-line"><span>CSCI 127 · Fall 2026</span><span id="today">New York time</span></p>
+      <h1 class="sr-only" id="home-title">CSCI 127 student hub</h1>
+
+      <div class="notice" id="no-course-data" hidden>
+        <p><strong>Course data is missing.</strong> This page was built without <code>course.js</code>. Run <code>npm run watch</code> and <code>npm run build</code>, or wait for the next automatic update.</p>
       </div>
-      <aside class="notice" aria-label="Unofficial student guide notice">
-        <strong>Unofficial student guide</strong>
-        <span>Made for students, not by the course. Brightspace and Gradescope win when anything here disagrees.</span>
-        <a href="#sources">Official sources</a>
-      </aside>
+
+      <section class="block" aria-labelledby="now-title">
+        <h2 class="block-title" id="now-title">Now</h2>
+        <div id="now"></div>
+      </section>
+
+      <section class="block" aria-labelledby="next-title">
+        <h2 class="block-title" id="next-title">Next</h2>
+        <ol class="task-rows" id="next"></ol>
+        <p class="small muted" id="progress-label"></p>
+        <details class="more" id="rest-of-week">
+          <summary>Show the rest of this week</summary>
+          <div id="rest"></div>
+        </details>
+      </section>
+
+      <section class="block" aria-labelledby="week-title">
+        <h2 class="block-title" id="week-title">This week</h2>
+        <ol class="week-strip" id="week-strip" aria-label="Days of this week"></ol>
+        <details class="more">
+          <summary id="week-plan-summary">This week's topics and reading</summary>
+          <div id="week-plan"></div>
+        </details>
+      </section>
+
+      <nav class="block" aria-labelledby="else-title">
+        <h2 class="block-title" id="else-title">Everything else</h2>
+        <ul class="else-list">
+          <li><a href="#all">All deadlines, with search</a></li>
+          <li><a href="#announcements">Announcements</a></li>
+          <li><a href="#toolbox">Which website for what</a></li>
+          <li><a href="#grading">Grading and rules</a></li>
+          <li><a href="#lab">Lab and campus days</a></li>
+          <li><a href="#software">Software setup</a></li>
+          <li><a href="#sources">Sources and updates</a></li>
+        </ul>
+      </nav>
     </section>
 
-    <div class="callout warn" id="no-course-data" hidden>
-      <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
-      <p><strong>Course data is missing.</strong> This page was built without <code>course.js</code>. Run <code>npm run watch</code> and <code>npm run build</code>, or wait for the next automatic update.</p>
-    </div>
-
-    <nav class="questions" aria-label="Jump to an answer">
-      <p class="questions-label">Jump to an answer</p>
-      <ul id="question-list" class="question-list"></ul>
-    </nav>
-
-    <div class="toolbar" id="toolbar">
+    <!-- All deadlines -->
+    <section class="screen" id="all" data-screen hidden aria-labelledby="all-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="all-title">All deadlines</h1>
+      <p class="muted" id="checklist-count"></p>
       <form class="search" role="search" id="search-form">
-        <label for="search" class="search-label">Search this page</label>
-        <div class="search-field">
-          <svg class="icon" aria-hidden="true"><use href="#i-search"/></svg>
-          <input id="search" type="search" name="q" placeholder="Try: quiz, Navigate, Python, due" autocomplete="off" spellcheck="false" aria-describedby="search-help">
-          <button type="button" class="icon-button search-clear" id="search-clear" hidden aria-label="Clear search">
-            <svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>
-          </button>
+        <label for="search">Search</label>
+        <div class="search-row">
+          <input id="search" type="search" name="q" placeholder="quiz, Navigate, Python, due…" autocomplete="off" spellcheck="false" aria-describedby="search-help">
+          <button type="button" class="text-button" id="search-clear" hidden>Clear</button>
         </div>
-        <p id="search-help" class="sr-only">Results update as you type. Matching sections open automatically.</p>
+        <p id="search-help" class="sr-only">Results update as you type.</p>
       </form>
       <fieldset class="filters" id="filters">
-        <legend class="filters-label">Show</legend>
+        <legend class="small muted">Show</legend>
         <div class="filter-row" id="filter-row"></div>
       </fieldset>
-      <div class="toolbar-actions">
-        <button type="button" class="ghost-button" id="expand-all">Expand all</button>
-        <button type="button" class="ghost-button" id="collapse-all">Collapse all</button>
+      <p class="small muted" id="results-status" role="status" aria-live="polite"></p>
+      <ol class="task-groups" id="task-list"></ol>
+      <div id="global-empty" hidden>
+        <p id="global-empty-text">Nothing on this page matches.</p>
+        <p><button type="button" class="text-button" id="empty-clear-search">Clear search</button> · <button type="button" class="text-button" id="empty-clear-filters">Show all categories</button></p>
       </div>
-      <p class="results-status" id="results-status" role="status" aria-live="polite"></p>
-    </div>
-
-    <div class="global-empty" id="global-empty" hidden>
-      <svg class="icon icon-lg" aria-hidden="true"><use href="#i-search"/></svg>
-      <h2 class="global-empty-title">No matches</h2>
-      <p id="global-empty-text">Nothing on this page matches.</p>
-      <div class="global-empty-actions">
-        <button type="button" class="button" id="empty-clear-search">Clear search</button>
-        <button type="button" class="ghost-button" id="empty-clear-filters">Show all categories</button>
-      </div>
-    </div>
-
-    <!-- 1. Do this first -->
-    <section id="first" class="panel panel-focus" data-section aria-labelledby="first-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow coral">Do this first · <span id="focus-window"></span></p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="first-body" id="first-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span id="focus-title-text">The next few days</span></button></h2>
-          <p class="panel-sub" id="focus-intro"></p>
-        </div>
-        <div class="progress-card">
-          <p class="progress-label" id="progress-label">0 of 0 items done</p>
-          <div class="progress" role="progressbar" aria-labelledby="progress-label" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" id="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-          <div class="progress-actions">
-            <button type="button" class="ghost-button small" id="reset-progress">
-              <svg class="icon" aria-hidden="true"><use href="#i-reset"/></svg>
-              <span>Reset progress</span>
-            </button>
-            <div class="confirm" id="reset-confirm" hidden>
-              <span id="reset-confirm-text">Uncheck everything on this page?</span>
-              <button type="button" class="button small danger" id="reset-yes">Yes, reset</button>
-              <button type="button" class="ghost-button small" id="reset-no">Cancel</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="panel-body" id="first-body">
-        <div class="focus-grid">
-          <div class="focus-group">
-            <h3 class="group-title"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg> <span id="focus-online-title">Online / at home</span></h3>
-            <ol class="task-list" id="focus-before"></ol>
-          </div>
-          <div class="focus-group">
-            <h3 class="group-title"><svg class="icon" aria-hidden="true"><use href="#i-pin"/></svg> <span id="focus-campus-title">On campus</span></h3>
-            <ol class="task-list" id="focus-tuesday"></ol>
-          </div>
-        </div>
-        <p class="section-empty" id="first-empty" hidden>No urgent items match your search or filters.</p>
-      </div>
+      <section class="block" aria-labelledby="missed-title">
+        <h2 class="block-title" id="missed-title">Might have missed</h2>
+        <p class="muted" id="missed-intro"></p>
+        <ul class="task-rows" id="missed-list"></ul>
+      </section>
+      <p class="small muted">Homework rules from the course: due 5 pm, no late work, .py files that run on Python 3.10, and a header comment with your name and email. The homework page says submissions open three weeks early; the syllabus says four. Gradescope shows when each one is actually available.</p>
+      <p class="small">
+        <button type="button" class="text-button" id="reset-progress">Uncheck everything</button>
+        <span id="reset-confirm" hidden>Uncheck every item in this browser? <button type="button" class="text-button" id="reset-yes">Yes, uncheck</button> · <button type="button" class="text-button" id="reset-no">Cancel</button></span>
+      </p>
     </section>
 
-    <!-- 2. Today / tomorrow / campus day -->
-    <section id="days" class="panel" data-section aria-labelledby="days-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Day by day</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="days-body" id="days-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>Today, tomorrow, and your next campus day</span></button></h2>
-          <p class="panel-sub">Closures, lecture, lab hours and deadlines for each day, from the course site and Hunter's academic calendar.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="days-body">
-        <ul class="day-cards" id="day-cards"></ul>
-        <div class="two-col wide-left" id="campus-card">
-          <div>
-            <h3 class="group-title" id="campus-heading"><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Next campus day</h3>
-            <ol class="timeline" id="campus-timeline"></ol>
-          </div>
-          <div class="info-card bring">
-            <h3><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Bring / prepare</h3>
-            <ul class="bring-list" id="campus-bring"></ul>
-          </div>
-        </div>
-        <p class="section-empty" id="days-empty" hidden>No day-plan items match your search or filters.</p>
-      </div>
+    <!-- Announcements -->
+    <section class="screen" id="announcements" data-screen hidden aria-labelledby="announcements-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="announcements-title">Announcements</h1>
+      <p class="muted">Short summaries so you know something was posted. The full text is on Brightspace, which this page cannot log in to. Missing one? <a href="https://github.com/Namunamu23/csci127-student-hub/issues/new?template=announcement.yml" target="_blank" rel="noopener noreferrer">Add a one-line summary<span class="sr-only"> (opens in a new tab)</span></a> and it appears on the next update.</p>
+      <ul class="plain-list" id="announcement-list"></ul>
+      <p class="small muted" id="announcement-updated"></p>
     </section>
 
-    <!-- 3. This week -->
-    <section id="week" class="panel" data-section aria-labelledby="week-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow" id="week-eyebrow">From the course website's weekly plan</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="week-body" id="week-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span id="week-title-text">This week</span></button></h2>
-          <p class="panel-sub">Lecture topics, reading, coursework and handouts for the current week, exactly as the course site lists them.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="week-body">
-        <div id="week-body-content"></div>
-        <p class="section-empty" id="week-empty" hidden>Nothing in this week's plan matches your search or filters.</p>
-      </div>
+    <!-- Which website for what -->
+    <section class="screen" id="toolbox" data-screen hidden aria-labelledby="toolbox-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="toolbox-title">Which website for what</h1>
+      <p class="muted">One entry per place the course sends you. Links open in a new tab.</p>
+      <ul class="plain-list" id="toolbox-grid"></ul>
     </section>
 
-    <!-- 4. Checklist -->
-    <section id="checklist" class="panel" data-section aria-labelledby="checklist-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Everything, in date order</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="checklist-body" id="checklist-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>What is due, when, and where</span></button></h2>
-          <p class="panel-sub" id="checklist-count"></p>
-        </div>
-      </div>
-      <div class="panel-body" id="checklist-body">
-        <div class="legend" id="category-legend"></div>
-        <ol class="task-list task-list-full" id="task-list"></ol>
-        <p class="section-empty" id="checklist-empty" hidden>No tasks match your search or filters.</p>
-        <p class="fine-print">Homework rules from the course: due 5 pm, no late work, .py files that run on Python 3.10, and a header comment with your name and email. The homework page says submissions open up to three weeks early, while the syllabus says four; Gradescope shows when each assignment is actually available. Quiz and code-review windows come from the <a href="https://huntercsci127.github.io/f26/cw.html#calendar" target="_blank" rel="noopener noreferrer">coursework calendar<span class="sr-only"> (opens in a new tab)</span></a>.</p>
-      </div>
+    <!-- Grading and rules -->
+    <section class="screen" id="grading" data-screen hidden aria-labelledby="grading-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="grading-title">Grading and rules</h1>
+      <p class="muted">Weights are read from the general syllabus. Honors sections have their own syllabus.</p>
+      <ul class="plain-list" id="grading-weights"></ul>
+      <h2 class="block-title">To pass the course</h2>
+      <p id="grading-final-rule"></p>
+      <h2 class="block-title">Extra credit</h2>
+      <p id="grading-extra"></p>
+      <h2 class="block-title">Final exam</h2>
+      <dl class="facts" id="grading-final"></dl>
+      <p class="small muted" id="grading-source"></p>
+      <h2 class="block-title">AI and academic integrity</h2>
+      <p class="muted">Summarized from the syllabus. The syllabus wording is what counts.</p>
+      <h3 class="sub-title">Allowed</h3>
+      <ul id="ai-allowed"></ul>
+      <h3 class="sub-title">Not allowed</h3>
+      <ul id="ai-not-allowed"></ul>
+      <h3 class="sub-title">If it happens</h3>
+      <p id="ai-consequences"></p>
+      <p class="small muted" id="ai-source"></p>
     </section>
 
-    <!-- 5. Announcements -->
-    <section id="announcements" class="panel" data-section aria-labelledby="announcements-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Summaries from Brightspace</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="announcements-body" id="announcements-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>Announcements</span></button></h2>
-          <p class="panel-sub">Short summaries so you know something was posted. The full text is on Brightspace, which this hub cannot log in to. Missing one? <a href="https://github.com/Namunamu23/csci127-student-hub/issues/new?template=announcement.yml" target="_blank" rel="noopener noreferrer">Add a one-line summary<span class="sr-only"> (opens in a new tab)</span></a> and it appears on the next update.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="announcements-body">
-        <ul class="missed-list" id="announcement-list"></ul>
-        <p class="section-empty" id="announcements-empty" hidden>No announcements match your search or filters.</p>
-        <p class="fine-print" id="announcement-updated"></p>
-      </div>
+    <!-- Lab and campus days -->
+    <section class="screen" id="lab" data-screen hidden aria-labelledby="lab-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="lab-title">Lab and campus days</h1>
+      <h2 class="block-title" id="campus-heading">Next campus day</h2>
+      <ol class="timeline" id="campus-timeline"></ol>
+      <h3 class="sub-title">Bring</h3>
+      <ul id="campus-bring"></ul>
+      <h2 class="block-title">The lab: 1001E HN</h2>
+      <div id="lab-where"></div>
+      <h3 class="sub-title">What happens there</h3>
+      <ul id="lab-services"></ul>
+      <h3 class="sub-title">Closures coming up</h3>
+      <ul id="lab-closures"></ul>
+      <p class="small" id="lab-links"></p>
     </section>
 
-    <!-- 6. Toolbox -->
-    <section id="toolbox" class="panel" data-section aria-labelledby="toolbox-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Which website for what</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="toolbox-body" id="toolbox-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>Course toolbox</span></button></h2>
-          <p class="panel-sub">One card per place the course sends you. All links open in a new tab.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="toolbox-body">
-        <ul class="card-grid" id="toolbox-grid"></ul>
-        <p class="section-empty" id="toolbox-empty" hidden>No tools match your search or filters.</p>
-      </div>
+    <!-- Software setup -->
+    <section class="screen" id="software" data-screen hidden aria-labelledby="software-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="software-title">Software setup</h1>
+      <p class="muted">Install the first group now. Everything else can wait until its unit, and the lab computers already have all of it.</p>
+      <div id="software-phases"></div>
     </section>
 
-    <!-- 7. Grading -->
-    <section id="grading" class="panel" data-section aria-labelledby="grading-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">How the grade works</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="grading-body" id="grading-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>Grading weights and the final exam rule</span></button></h2>
-          <p class="panel-sub">Weights are read from the general syllabus. Honors sections have their own syllabus.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="grading-body">
-        <div class="two-col wide-left">
-          <div><ul class="weights" id="grading-weights"></ul></div>
-          <div class="stack">
-            <div class="info-card rule">
-              <h3><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> To pass the course</h3>
-              <p id="grading-final-rule" class="big-rule"></p>
-            </div>
-            <div class="info-card" id="grading-extra-card">
-              <h3><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg> Extra credit</h3>
-              <p id="grading-extra"></p>
-            </div>
-            <div class="info-card" id="grading-final-card">
-              <h3><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg> Final exam</h3>
-              <dl class="facts" id="grading-final"></dl>
-            </div>
-          </div>
-        </div>
-        <p class="section-empty" id="grading-empty" hidden>No grading facts match your search or filters.</p>
-        <p class="fine-print" id="grading-source"></p>
-      </div>
-    </section>
-
-    <!-- 8. Lab -->
-    <section id="lab" class="panel" data-section aria-labelledby="lab-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">The physical lab</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="lab-body" id="lab-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>1001E HN: location, hours, closures</span></button></h2>
-          <p class="panel-sub">Quizzes, code reviews, tutoring, and computers with everything installed.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="lab-body">
-        <div class="two-col">
-          <div class="stack">
-            <div class="info-card" id="lab-where"></div>
-            <div class="info-card" id="lab-services-card">
-              <h3><svg class="icon" aria-hidden="true"><use href="#i-people"/></svg> What happens there</h3>
-              <ul id="lab-services"></ul>
-            </div>
-          </div>
-          <div class="info-card closed" id="lab-closures-card">
-            <h3><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> Closures coming up</h3>
-            <ul id="lab-closures"></ul>
-            <p class="fine-print" id="lab-links"></p>
-          </div>
-        </div>
-        <p class="section-empty" id="lab-empty" hidden>No lab facts match your search or filters.</p>
-      </div>
-    </section>
-
-    <!-- 9. Software -->
-    <section id="software" class="panel" data-section aria-labelledby="software-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Organized by when you need it</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="software-body" id="software-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>Software and materials</span></button></h2>
-          <p class="panel-sub">Install the first group now. Everything else can wait until its unit — and the lab computers already have all of it.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="software-body">
-        <div id="software-phases"></div>
-        <p class="section-empty" id="software-empty" hidden>No software matches your search or filters.</p>
-      </div>
-    </section>
-
-    <!-- 10. AI policy -->
-    <section id="ai" class="panel" data-section aria-labelledby="ai-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Short version of the rules</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="ai-body" id="ai-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>AI and academic integrity</span></button></h2>
-          <p class="panel-sub">Summarized from the syllabus. The syllabus wording is what counts.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="ai-body">
-        <div class="two-col">
-          <div class="info-card open">
-            <h3><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg> Allowed</h3>
-            <ul id="ai-allowed"></ul>
-          </div>
-          <div class="info-card closed">
-            <h3><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg> Not allowed</h3>
-            <ul id="ai-not-allowed"></ul>
-          </div>
-        </div>
-        <div class="info-card rule" id="ai-consequences-card">
-          <h3><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg> If it happens</h3>
-          <p id="ai-consequences"></p>
-          <p class="fine-print" id="ai-source"></p>
-        </div>
-        <p class="section-empty" id="ai-empty" hidden>No policy items match your search or filters.</p>
-      </div>
-    </section>
-
-    <!-- 11. Possibly missed -->
-    <section id="missed" class="panel" data-section aria-labelledby="missed-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Looking back</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="missed-body" id="missed-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>What you might have missed</span></button></h2>
-          <p class="panel-sub" id="missed-intro"></p>
-        </div>
-      </div>
-      <div class="panel-body" id="missed-body">
-        <ul class="missed-list" id="missed-list"></ul>
-        <p class="section-empty" id="missed-empty" hidden>No items match your search or filters.</p>
-        <div class="callout">
-          <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
-          <p>The quickest way to know where you stand: open <a href="https://www.gradescope.com/courses/1270901" target="_blank" rel="noopener noreferrer">Gradescope<span class="sr-only"> (opens in a new tab)</span></a> for what has been received, and <a href="https://brightspace.cuny.edu/d2l/home/1315489" target="_blank" rel="noopener noreferrer">Brightspace<span class="sr-only"> (opens in a new tab)</span></a> for announcements. Nothing here is a record of your work.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 12. Updates -->
-    <section id="updates" class="panel" data-section aria-labelledby="updates-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Is this page up to date?</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="updates-body" id="updates-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>What changed and when each source was checked</span></button></h2>
-          <p class="panel-sub" id="updates-intro"></p>
-        </div>
-      </div>
-      <div class="panel-body" id="updates-body">
-        <div class="two-col">
-          <div class="info-card">
-            <h3><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg> What changed</h3>
-            <ul class="change-list" id="change-list"></ul>
-          </div>
-          <div class="info-card">
-            <h3><svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg> Sources checked</h3>
-            <ul class="status-list" id="status-sources"></ul>
-            <p class="fine-print">Brightspace and Gradescope are never read by this page. If a source cannot be reached, the previous copy stays up and it is marked here.</p>
-          </div>
-        </div>
-        <p class="section-empty" id="updates-empty" hidden>No update entries match your search or filters.</p>
-      </div>
-    </section>
-
-    <!-- 13. Sources -->
-    <section id="sources" class="panel panel-sources" data-section aria-labelledby="sources-title">
-      <div class="panel-head">
-        <div class="panel-heading">
-          <p class="eyebrow">Unofficial student guide</p>
-          <h2 class="panel-title"><button class="disclosure" type="button" aria-expanded="true" aria-controls="sources-body" id="sources-title"><svg class="icon chevron" aria-hidden="true"><use href="#i-chevron"/></svg><span>Official sources and how this page is made</span></button></h2>
-          <p class="panel-sub">This hub is not run by Hunter College or the CSCI 127 staff. A background job re-reads the public course pages and Hunter's academic calendar several times a day; the words around the data were written by students. When anything disagrees, the official sources win — Brightspace and Gradescope first.</p>
-        </div>
-      </div>
-      <div class="panel-body" id="sources-body">
-        <ul class="source-list" id="source-list"></ul>
-        <p class="section-empty" id="sources-empty" hidden>No sources match your search or filters.</p>
-        <p class="fine-print">Items marked <span class="tag tag-verify">Verify</span> come from a page that may be stale or that disagrees with another page. Confirm them on Brightspace before relying on them.</p>
-      </div>
+    <!-- Sources and updates -->
+    <section class="screen" id="sources" data-screen hidden aria-labelledby="sources-title">
+      <p class="back"><a href="#home">Back to today</a></p>
+      <h1 class="screen-title" id="sources-title">Sources and updates</h1>
+      <p class="muted">This page is not run by Hunter College or the CSCI 127 staff. A background job re-reads the public course pages and Hunter's academic calendar several times a day; the words around the data were written by students. When anything disagrees, the official sources win, Brightspace and Gradescope first.</p>
+      <h2 class="block-title">Official sources</h2>
+      <ul class="plain-list" id="source-list"></ul>
+      <h2 class="block-title">Is this page up to date?</h2>
+      <p class="muted" id="updates-intro"></p>
+      <ul class="plain-list" id="status-sources"></ul>
+      <h3 class="sub-title">What changed</h3>
+      <ul class="plain-list" id="change-list"></ul>
+      <p class="small muted">Items marked "verify" come from a page that may be stale or that disagrees with another page. Confirm them on Brightspace before relying on them. Editorial text last reviewed <span id="last-reviewed"></span>.</p>
     </section>
   </main>
 
   <footer class="site-footer">
-    <p>Unofficial student guide. Editorial text last reviewed <span id="last-reviewed"></span>. No login, no analytics, no tracking — your checkmarks are stored only in this browser.</p>
+    <p>Unofficial student guide. Brightspace and Gradescope win when anything here disagrees. No login, no tracking; checkmarks stay in this browser.</p>
   </footer>
 
   <div class="sr-only" role="status" aria-live="polite" id="announcer"></div>
