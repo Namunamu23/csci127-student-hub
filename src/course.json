@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-07T02:55:28.899Z",
+  "generatedAt": "2026-09-09T23:15:31.776Z",
   "term": "Fall 2026",
   "timeZone": "America/New_York",
-  "courseRepoSha": "674d8d440d76c031c336612bd5f7951361a9b9bd",
+  "courseRepoSha": "bbec9983a9a8fcdb3acbf7f13fe63ca3f9232504",
   "lecture": "Tuesdays 10-11:15am, in 118 HN (Assembly Hall, 1st floor of North Building), start on September 1.",
   "labInfo": "In 1001E HN (10th floor of North Building), self-scheduled appointments via Navigate or drop-in tutoring available.",
   "finalNote": "Friday, 12/15, 9-11am Final Exam in Assembly Hall (118 HN) Exam Information",
@@ -185,6 +185,10 @@
         {
           "label": "Color Challenges",
           "href": "https://trinket.strivemath.org/python/7b3dcbea254a"
+        },
+        {
+          "label": "Month Challenges",
+          "href": "https://pythontutor.com/visualize.html#code=months%20%3D%20%5B%22Jan%22,%22Feb%22,%22Mar%22,%22Apr%22,%22May%22,%22Jun%22,%22Jul"
         }
       ],
       "coursework": [
