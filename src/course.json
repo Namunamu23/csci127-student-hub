@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-09T23:15:31.776Z",
+  "generatedAt": "2026-09-15T14:20:06.033Z",
   "term": "Fall 2026",
   "timeZone": "America/New_York",
-  "courseRepoSha": "bbec9983a9a8fcdb3acbf7f13fe63ca3f9232504",
+  "courseRepoSha": "4bb999b3a42bee890d4256ae0bd19a8b4dfa8050",
   "lecture": "Tuesdays 10-11:15am, in 118 HN (Assembly Hall, 1st floor of North Building), start on September 1.",
   "labInfo": "In 1001E HN (10th floor of North Building), self-scheduled appointments via Navigate or drop-in tutoring available.",
   "finalNote": "Friday, 12/15, 9-11am Final Exam in Assembly Hall (118 HN) Exam Information",
@@ -188,7 +188,7 @@
         },
         {
           "label": "Month Challenges",
-          "href": "https://pythontutor.com/visualize.html#code=months%20%3D%20%5B%22Jan%22,%22Feb%22,%22Mar%22,%22Apr%22,%22May%22,%22Jun%22,%22Jul"
+          "href": "https://pythontutor.com/iframe-embed.html#code=months%20%3D%20%5B%22Jan%22,%22Feb%22,%22Mar%22,%22Apr%22,%22May%22,%22Jun%22,%22Jul%22,%22Aug%22,%22Sep%22,%22Oct%22,%22Nov%22,%22Dec%22%5D%20%20%20%20%0A%23Indices%3A%20%20%200%20%20%20%20%201%20%20%20%20%202%20%20%20%20%203%20%20%20%20%204%20%20%20%20%205%20%20%20%20%206%20%20%20%20%207%20%20%20%20%208%20%20%20%20%209%20%20%20%2010%20%20%20%2011%20%20%0A%23Or%3A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20....%20%20%20-3%20%20%20%20-2%20%20%20%20-1%20%0A%0Ahalf%20%3D%20months%5B6%5D%0Aprint%28half.upper%28%29%29%0A%0Aprint%28months%5B-1%5D.lower%28%29%29%0A%0Astart%20%3D%209%0Aprint%28months%5Bstart-1%5D%29%0A%0Aterm%20%3D%203%0Aprint%28months%5B%28start%2Bterm-1%29%2512%5D%29%0A&codeDivHeight=400&codeDivWidth=350&curInstr=0&origin=opt-frontend.js&py=311"
         }
       ],
       "coursework": [

@@ -1,5 +1,12 @@
 [
   {
+    "detectedAt": "2026-09-15T14:20:06.033Z",
+    "courseCommit": "4bb999b3a42bee890d4256ae0bd19a8b4dfa8050",
+    "items": [
+      "Week 3 (2026-09-15) — handouts changed: Arithmetic Challenge, Slicing Challenges, Color Challenges, Month Challenges → Arithmetic Challenge, Slicing Challenges, Color Challenges, Month Challenges"
+    ]
+  },
+  {
     "detectedAt": "2026-09-09T23:15:31.776Z",
     "courseCommit": "bbec9983a9a8fcdb3acbf7f13fe63ca3f9232504",
     "items": [
