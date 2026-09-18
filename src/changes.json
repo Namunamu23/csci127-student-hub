@@ -1,5 +1,12 @@
 [
   {
+    "detectedAt": "2026-09-18T23:18:55.223Z",
+    "courseCommit": "3f23e782733e8f94651f48916b81d10fad1ee4fb",
+    "items": [
+      "Week 2 (2026-09-08) — reading changed: Chapter 2, Chapter 3 → Chapter 2, Chapter 3, & Section 9.5 (String Methods)"
+    ]
+  },
+  {
     "detectedAt": "2026-09-15T14:20:06.033Z",
     "courseCommit": "4bb999b3a42bee890d4256ae0bd19a8b4dfa8050",
     "items": [

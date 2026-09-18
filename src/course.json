@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-15T14:20:06.033Z",
+  "generatedAt": "2026-09-18T23:18:55.223Z",
   "term": "Fall 2026",
   "timeZone": "America/New_York",
-  "courseRepoSha": "4bb999b3a42bee890d4256ae0bd19a8b4dfa8050",
+  "courseRepoSha": "3f23e782733e8f94651f48916b81d10fad1ee4fb",
   "lecture": "Tuesdays 10-11:15am, in 118 HN (Assembly Hall, 1st floor of North Building), start on September 1.",
   "labInfo": "In 1001E HN (10th floor of North Building), self-scheduled appointments via Navigate or drop-in tutoring available.",
   "finalNote": "Friday, 12/15, 9-11am Final Exam in Assembly Hall (118 HN) Exam Information",
@@ -161,11 +161,11 @@
           "href": "https://runestone.academy/ns/books/published//thinkcspy/SimplePythonData/toctree.html"
         },
         {
-          "label": "Chapter 3",
+          "label": "Chapter 3, & Section 9.5 (String Methods)",
           "href": "https://runestone.academy/ns/books/published//thinkcspy/Debugging/toctree.html"
         }
       ],
-      "readingText": "Think CS: Chapter 2 & Chapter 3",
+      "readingText": "Think CS: Chapter 2, Chapter 3, & Section 9.5 (String Methods)",
       "notes": []
     },
     {
