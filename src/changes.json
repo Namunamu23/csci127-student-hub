@@ -1,5 +1,14 @@
 [
   {
+    "detectedAt": "2026-09-20T23:15:25.989Z",
+    "courseCommit": "7501d757f1604e3cf865d59c1321ffe34204c821",
+    "items": [
+      "Week 4 (2026-09-22) — handouts changed: Loop & Slice Challenges, Decision Challenges, turtleString.py → Loop & Slice Challenges, Logical Operators & List Comprehensions, Decision Challenges, …",
+      "Week 5 (2026-09-29) — topics changed: Logical Expressions & Circuits; More on Decisions (snow pack) → Logical Expressions & Circuits; More on Decisions (snow pack); CS Survey: Elise Harris,…",
+      "Week 6 (2026-10-06) — handouts changed: String Challenge, Arithmetic Challenges, Logical Operators & List Comprehensions → String Challenge, Arithmetic Challenges"
+    ]
+  },
+  {
     "detectedAt": "2026-09-18T23:18:55.223Z",
     "courseCommit": "3f23e782733e8f94651f48916b81d10fad1ee4fb",
     "items": [
