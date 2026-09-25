@@ -1,5 +1,13 @@
 [
   {
+    "detectedAt": "2026-09-25T14:36:45.495Z",
+    "courseCommit": "13d22d50cf109aa36114090ce2f57e3385b7c035",
+    "items": [
+      "Added: Course-site note Finals Week: Tuesday, 12/15, 9-11am",
+      "Removed: Course-site note Finals Week: Friday, 12/15, 9-11am"
+    ]
+  },
+  {
     "detectedAt": "2026-09-20T23:15:25.989Z",
     "courseCommit": "7501d757f1604e3cf865d59c1321ffe34204c821",
     "items": [

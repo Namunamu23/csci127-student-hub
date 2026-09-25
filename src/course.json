@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-09-20T23:15:25.989Z",
+  "generatedAt": "2026-09-25T14:36:45.495Z",
   "term": "Fall 2026",
   "timeZone": "America/New_York",
-  "courseRepoSha": "7501d757f1604e3cf865d59c1321ffe34204c821",
+  "courseRepoSha": "13d22d50cf109aa36114090ce2f57e3385b7c035",
   "lecture": "Tuesdays 10-11:15am, in 118 HN (Assembly Hall, 1st floor of North Building), start on September 1.",
   "labInfo": "In 1001E HN (10th floor of North Building), self-scheduled appointments via Navigate or drop-in tutoring available.",
-  "finalNote": "Friday, 12/15, 9-11am Final Exam in Assembly Hall (118 HN) Exam Information",
+  "finalNote": "Tuesday, 12/15, 9-11am Final Exam in Assembly Hall (118 HN) Exam Information",
   "weeks": [
     {
       "n": 0,
@@ -896,7 +896,7 @@
         {
           "date": null,
           "dateText": "Finals Week",
-          "text": "Friday, 12/15, 9-11am",
+          "text": "Tuesday, 12/15, 9-11am",
           "links": [],
           "announcement": false,
           "labClosed": false,
