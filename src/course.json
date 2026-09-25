@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-25T14:36:45.495Z",
+  "generatedAt": "2026-09-25T19:15:25.525Z",
   "term": "Fall 2026",
   "timeZone": "America/New_York",
-  "courseRepoSha": "13d22d50cf109aa36114090ce2f57e3385b7c035",
+  "courseRepoSha": "55e8296e360922e45e62912e9aca660be2680e14",
   "lecture": "Tuesdays 10-11:15am, in 118 HN (Assembly Hall, 1st floor of North Building), start on September 1.",
   "labInfo": "In 1001E HN (10th floor of North Building), self-scheduled appointments via Navigate or drop-in tutoring available.",
   "finalNote": "Tuesday, 12/15, 9-11am Final Exam in Assembly Hall (118 HN) Exam Information",
@@ -2605,11 +2605,11 @@
     },
     {
       "week": 12,
-      "start": "2026-11-29",
-      "early15": "2026-11-29",
-      "early10": "2026-11-30",
-      "early5": "2026-12-01",
-      "end": "2026-12-02",
+      "start": "2026-11-30",
+      "early15": "2026-11-30",
+      "early10": "2026-12-01",
+      "early5": "2026-12-02",
+      "end": "2026-12-03",
       "quiz": {
         "n": 12,
         "text": "Indefinite Loops and Unix Scripts (see Lab 10)",
@@ -2672,8 +2672,8 @@
     },
     {
       "week": 14,
-      "start": "2026-12-09",
-      "early15": "2026-12-09",
+      "start": "2026-12-10",
+      "early15": null,
       "early10": "2026-12-10",
       "early5": "2026-12-11",
       "end": "2026-12-14",
